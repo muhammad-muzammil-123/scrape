@@ -1,15 +1,91 @@
 
 "use client";
 import Link from "next/link";
-import "./style.css"
+import "./style.css";
+import {Message,Space } from "antd";
 import Image from "next/image";
 import React, { useState } from 'react';
 import { Typography } from "@material-tailwind/react";
+
+
 export default function Dashboard(){
-  const [url, setUrl] = useState('');
-  const [title, setTitle] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('')
+  const [locationKeyword, setLocationKeyword] = useState('')
+  const [data, setData] = useState(null)
   const [error, setError] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [expandedRows, setExpandedRows] = useState({});
+
+  const toggleRowExpansion = (index) => {
+    setExpandedRows((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index], // Toggle the state for the specific row
+    }));
+  };
+  
+const dummydata = [
+  {
+      "job_data": {
+          "title": "Python Developer (Blockchain Protocol Engineer)",
+          "company": "TekScrum",
+          "location": "Karāchi, Sindh, Pakistan",
+          "application_status": "1 week ago",
+          "time_posted": ""
+      },
+      "description": "Job Title: Rust Developer for Solana Smart Contract Development (Project-Based) Company: Eon Weave Labs Location: Remote Job Type: Project-Based Contract"
+  },
+  {
+      "job_data": {
+          "title": "Asset Integrity Engineer",
+          "company": "Sui Southern Gas Company Limited",
+          "location": "Karachi Division, Sindh, Pakistan",
+          "application_status": "8 months ago",
+          "time_posted": ""
+      },
+      "description": "BS/BE in Metallurgy/ Electrical/ Chemical/Mechanical. Candidates shall have minimum 2 Years’ experience of supervision of Cathodic Protection systems, Coating inspections, asset integrity inspections (Candidates with previous experience of Oil & Gas Sector would be preferred) Implement corrective action through corrosion personnel"
+  },
+  {
+      "job_data": {
+          "title": "Asset Integrity Engineer",
+          "company": "Sui Southern Gas Company Limited",
+          "location": "Karachi Division, Sindh, Pakistan",
+          "application_status": "10 months ago",
+          "time_posted": ""
+      },
+      "description": "Bachelor’s degree in Engineering (Metallurgy/Materials/ Mechanical) with at least 5 years of experience in Cathodic Protection designing and supervision of cathodic protection, coating inspections, asset integrity inspections with certification of TWI/AMPP/API. Experience in Oil and Gas Sector shall be preferred. Implement corrective action through corrosion personnel."
+  },
+  {
+      "job_data": {
+          "title": "Lead Engineer",
+          "company": "Gaditek",
+          "location": "Karāchi, Sindh, Pakistan",
+          "application_status": "Be an early applicant",
+          "time_posted": "1 month ago"
+      },
+      "description": "Company Overview At Gaditek, our talent is not just exceptional - it's world-class! Our unstoppable team of 800+ employees is the best and the brightest, driving innovation across 7 Global SaaS Brands in 6 hottest industries, including Cyber Security, Digital Media, Managed Cloud, Affiliate Marketing, E-Commerce, Web.3.0, and Venture Building as a Service. Our team is made up of dreamers, doers, and all-around rockstars who are committed to making a difference. As a result, we’re among the best companies to work for, with a plethora of benefits and an amazing culture. We are seeking a middleware layer for an automotive software stack based on a microkernel architecture that involves several key competencies. Middleware acts as the bridge between the lower-level OS services (provided by the microkernel and user space) and the higher-level functional applications. It plays a crucial role in ensuring smooth communication, data management, and service orchestration across the system. Here are the essential competencies to look for in individuals for middleware development in this context. Operating System Fundamentals Middleware Development Programming Languages Data Management Familiar with Automotive Industry Standards"
+  },
+  {
+      "job_data": {
+          "title": "Blockchain TTO",
+          "company": "Ideofuzion",
+          "location": "Karāchi, Sindh, Pakistan",
+          "application_status": "Be an early applicant",
+          "time_posted": "2 weeks ago"
+      },
+      "description": "The Blockchain TTO role at Ideofuzion is entry-level, tailored for recent graduates skilled in Solidity or Rust. Responsibilities include developing, implementing, and maintaining blockchain applications and smart contracts, collaborating with teams, and staying updated on industry trends."
+  },
+  {
+      "job_data": {
+          "title": "Asset Integrity Senior Engineer",
+          "company": "Sui Southern Gas Company Limited",
+          "location": "Karachi Division, Sindh, Pakistan",
+          "application_status": "8 months ago",
+          "time_posted": ""
+      },
+      "description": "BS/BE in Metallurgy/ Electrical/ Chemical/Mechanical. Candidates shall have minimum 4 Years’ experience of cathodic protection designing, supervision of Cathodic Protection systems, Coating inspections, asset integrity inspections. Well-balanced interpersonal skills and strong verbal and written communications skills. (Candidates with certification of TWI/NACE(AMPP)/API would be preferred) Implement corrective action through corrosion personnel"
+  }
+]
+  
 
   // Toggle the mobile menu
   const toggleMenu = () => {
@@ -35,17 +111,15 @@ export default function Dashboard(){
   ];
    
   const currentYear = new Date().getFullYear();
+   
+ 
   
-  const handleScrape = async () => {
-    try {
-      const response = await axios.post('http://localhost:5000/scrape', { url });
-      setTitle(response.data.title);
-      setError('');
-    } catch (error) {
-      setError('Failed to fetch data from the URL');
-      setTitle('');
-    }
-  };
+
+
+  
+    
+
+
     return(
       <>
         <div className="container mx-atuo flex flex-col content-center w-full">
@@ -97,19 +171,115 @@ export default function Dashboard(){
 </div>
 
 
-<h1 className="md:text-5xl sm:text-3xl text-2xl text-white mt-20 text-center">Would you like to scraping today?</h1>
-<div className="md:mt-36 mt-20 text-center text-base">
+<h1 className="md:text-5xl sm:text-3xl text-2xl text-white mt-20 text-center">Would you like to job scraping ?</h1>
+<div className="md:mt-36 mt-20 text-center  text-base">
+ 
 <input
         type="text"
-       className="sm:px-32 sm:px-20 px-16 outline-none rounded-md md:mb-0 mb-5  py-4"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        placeholder="Enter URL"
+       className="sm:px-32  px-16 outline-none rounded-md md:mb-0 mb-5  py-4"
+      onChange={(event) => setSearchKeyword(event.target.value)}
+        placeholder="Enter  Job Type"
+
       />
-      <button className="ml-6 sm:py-4 py-3 sm:px-16 px-10 bg-violet-500  transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" onClick={handleScrape}>Scrape</button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {title && <h2>Title: {title}</h2>}
-</div>
+            <br />
+            <br />
+
+<input
+        type="text"
+       className="sm:px-32  px-16 outline-none rounded-md md:mb-0 mb-5  py-4"
+       onChange={(event) => setLocationKeyword(event.target.value)}
+        placeholder="Enter  Location"
+      />
+       <br />
+       <br />
+      <button   className="ml-6 sm:py-4 py-3 sm:px-16 px-10 bg-violet-500  transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" >Scrape</button>
+     </div>
+     {/* <div className='  '>
+                    {dummydata.map((elem, index) => (
+                        <table key={index} className=' border table w-full table-fixed p-10'>
+                          
+                          <thead className="table-header-group ">
+                          <tr className="table-row">
+                            <th className='text-white table-cell '>title</th> 
+                            <th className='text-white table-cell '>company</th>
+                            <th className='text-white table-cell '>location </th>
+                            <th className='text-white table-cell '>application status</th>
+                            <th className='text-white table-cell '>timeposted</th>
+                            <th className='text-white table-cell '>Description</th>
+                            </tr>
+                            </thead>
+                            <tbody className="table-row-group">
+                            <tr className="table-row">
+                            <td className="table-cell text-gray-200 ">{elem?.job_data?.title}</td> 
+                            <td className="table-cell text-gray-200 "> {elem?.job_data?.company}</td>
+                            <td className="table-cell text-gray-200">{elem?.job_data?.location}</td>
+                            <td className="table-cell text-gray-200">{elem?.job_data?.application_status}</td>
+                            <td className="table-cell text-gray-200">{elem?.job_data?.time_posted}</td>
+                            <td className=' table-cell  text-gray-200'>{elem?.description}</td>
+                             </tr>
+                             </tbody>
+                           
+                           
+                            
+                        </table>
+                    ))}
+                </div> */}
+                <div className='p-10 ml-10 2 rounded-md'>
+      {dummydata.map((elem, index) => {
+        const isExpanded = expandedRows[index];
+
+        return (
+          <div key={index} className='overflow-x-auto  p-4 mb-6 '>
+            <table className='w-full  table-auto border-collapse border  border-gray-700'>
+              <thead className='bg-gray-300'>
+                <tr>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Title</th>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Company</th>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Location</th>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Application Status</th>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Time Posted</th>
+                  <th className='text-gray-900 px-4 py-2 border border-gray-700'>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className='bg-gray-900'>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    {elem?.job_data?.title}
+                  </td>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    {elem?.job_data?.company}
+                  </td>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    {elem?.job_data?.location}
+                  </td>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    {elem?.job_data?.application_status}
+                  </td>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    {elem?.job_data?.time_posted}
+                  </td>
+                  <td className='text-gray-200 px-4 py-2 border border-gray-700'>
+                    <div className='whitespace-nowrap overflow-hidden text-ellipsis'>
+                      <div className={`overflow-x-auto ${isExpanded ? '' : 'max-w-xs'}`}>
+                        {isExpanded ? elem.description : elem.description.slice(0, 100) + '...'}
+                      </div>
+                      <button
+                        className='text-blue-400 hover:underline ml-2'
+                        onClick={() => toggleRowExpansion(index)}
+                      >
+                        {isExpanded ? 'Show Less' : 'Read More'}
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
+          
+
 
 
 
@@ -120,7 +290,7 @@ export default function Dashboard(){
 <p className="md:text-xl text-base mt-3  leading-10 tracking-widest">
 Job scraping is the automated method of collecting job postings from different websites, including such information as a job title, job description, job openings, and other web data regarding job details.
 </p>
-<button className="mt-5 mb-4 ml-6 py-4 px-5 bg-violet-500 transition-all text-white font-semibold rounded-md shadow-md hover:bg-purple-500">
+<button  className="mt-5 mb-4 ml-6 py-4 px-5 bg-violet-500 transition-all text-white font-semibold rounded-md shadow-md hover:bg-purple-500">
   Let's go
 </button>
 </div>

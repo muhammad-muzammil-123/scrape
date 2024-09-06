@@ -33,7 +33,80 @@ function companyScrape (){
       links: ["Templates", "UI Kits", "Icons", "Mockups"],
     },
   ];
-   
+  const dummydata = [
+    {
+        "Company_Name": "SiliconMint",
+        "Executives": {
+            "Name": "Eugene Sokolov",
+            "Title": "Software Delivery Manager at SiliconMint",
+            "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQH_Z4ipGfrXSg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1539268432587?e=2147483647&v=beta&t=7oWgddPqb-81fhEKgfUMcNVqzClsR3lejIomkSxOA5k"
+        }
+    },
+    {
+        "Company_Name": "Azumo",
+        "Executives": {
+            "Name": "Chike Agbai",
+            "Title": "Founder and CEO | Azumo.com",
+            "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQFY1jnTFjj5rQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1571092182728?e=2147483647&v=beta&t=_X2EwfwbHwsfr9ZCDAYdneLtLr72ZE-os2N7P_ajdmc"
+        }
+    },
+    {
+        "Company_Name": "Azumo",
+        "Executives": {
+            "Name": "Juan Pablo Lorandi",
+            "Title": "CTO at Azumo and myNLU.com",
+            "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQHxBcVA2cSAHg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517655138210?e=2147483647&v=beta&t=TbWJFcNLSeaYPLVl6_raLGq-Tp9AivFM4bPVTPsbnNQ"
+        }
+    },
+    {
+        "Company_Name": "Azumo",
+        "Executives": {
+            "Name": "Leandro Hugo Vergara",
+            "Title": "Laravel Software Engineer",
+            "Image URL": "https://media.licdn.com/dms/image/v2/C4E03AQFwKrbqZYEGAg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1555630572888?e=2147483647&v=beta&t=ZOg8lsNayJdBAsYSjAzIU1rBgoAFoeSjydaR5T6xj_Q"
+        }
+    },
+    {
+        "Company_Name": "Azumo",
+        "Executives": {
+            "Name": "Damián Nail",
+            "Title": "Senior Software Engineer at Azumo",
+            "Image URL": "https://media.licdn.com/dms/image/v2/C4D03AQGuDlRzJJUBPw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516808674201?e=2147483647&v=beta&t=MLoV93J-kibcRK2MWqDr5bl3z4MKB_chneYAgg_b4iU"
+        }
+    },
+    {
+        "Company_Name": "Unity",
+        "Executives": {
+            "Name": "Max Levchin\nMax Levchin is an Influencer",
+            "Title": "Co-Founder & CEO at Affirm, Inc",
+            "Image URL": null
+        }
+    },
+    {
+        "Company_Name": "Unity",
+        "Executives": {
+            "Name": "Bart Manning",
+            "Title": "Head of Sales & Business Development, Strategic Verticals EMEA at Unity Technologies",
+            "Image URL": null
+        }
+    },
+    {
+        "Company_Name": "Unity",
+        "Executives": {
+            "Name": "Roelof Botha",
+            "Title": "Partner at Sequoia Capital",
+            "Image URL": null
+        }
+    },
+    {
+        "Company_Name": "Unity",
+        "Executives": {
+            "Name": "Eric Wersel",
+            "Title": "Senior Engineering Manager and Software Engineer",
+            "Image URL": null
+        }
+    }
+]
   const currentYear = new Date().getFullYear();
   
 
@@ -91,13 +164,58 @@ function companyScrape (){
        className="px-32 outline-none rounded-md py-4"
         
         
-        placeholder="Enter URL"
+        placeholder="Enter Location"
       />
       <button className="ml-6 py-4 px-16 bg-violet-500 transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" >Scrape</button>
       
 </div>
 
+<div className="p-10 ml-5">
+      {dummydata.map((elem, index) => {
+        const executive = elem?.Executives;
 
+        return (
+          <div key={index} className="overflow-x-auto p-4 mb-6">
+            <table className="w-full table-auto border-collapse border border-gray-700">
+              <thead className="bg-gray-300">
+                <tr>
+                  <th className="text-gray-800 px-4 py-2 border border-gray-700">Company</th>
+                  <th className="text-gray-800 px-4 py-2 border border-gray-700">Image</th>
+                  <th className="text-gray-800 px-4 py-2 border border-gray-700">Executive Name</th>
+                  <th className="text-gray-800 px-4 py-2 border border-gray-700">Title</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="bg-gray-900">
+                  <td className="text-gray-200 px-4 py-2 border border-gray-700">
+                    {elem?.Company_Name}
+                  </td>
+                  <td className="text-gray-200 px-4 py-2 border border-gray-700">
+                    {executive?.["Image URL"] ? (
+                      <img
+                        src={executive?.["Image URL"]}
+                        alt={executive?.Name}
+                        className="w-16 h-16 object-cover"
+                      />
+                    ) : (
+                      'No Image'
+                    )}
+                  </td>
+                  <td className="text-gray-200 px-4 py-2 border border-gray-700">
+                    {executive?.Name}
+                  </td>
+                  <td className="text-gray-200 px-4 py-2 border border-gray-700">
+                    {executive?.Title}
+                  </td>
+                  
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        );
+      })}
+    </div>
 
 <div className=" section-2  text-white text-center mt-36">
 <h2 className="text-5xl ">

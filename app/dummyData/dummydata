@@ -1,0 +1,348 @@
+// company & cto:
+const Commpany_Cto_scrape = () => {
+    const [location, setLocation] = useState('')
+    const [data, setData] = useState(null)
+    console
+    function jobsScrap() {
+        fetch('http://127.0.0.1:8000/scrape_CTOs/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ locationKeyword: location }),
+        })
+        
+            .then(response => {
+                console.log(location)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log('response', response);  // Check if this line fails
+                return response.json();
+            })
+            .then(data => {
+                setData(data);
+                console.log(data);  // Check if this line fails
+            })
+            .catch(error => {
+                console.error(error);  // Use console.error to log errors
+            });
+    }
+    const dummydata = [
+        {
+            "Company_Name": "SiliconMint",
+            "Executives": {
+                "Name": "Eugene Sokolov",
+                "Title": "Software Delivery Manager at SiliconMint",
+                "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQH_Z4ipGfrXSg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1539268432587?e=2147483647&v=beta&t=7oWgddPqb-81fhEKgfUMcNVqzClsR3lejIomkSxOA5k"
+            }
+        },
+        {
+            "Company_Name": "Azumo",
+            "Executives": {
+                "Name": "Chike Agbai",
+                "Title": "Founder and CEO | Azumo.com",
+                "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQFY1jnTFjj5rQ/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1571092182728?e=2147483647&v=beta&t=_X2EwfwbHwsfr9ZCDAYdneLtLr72ZE-os2N7P_ajdmc"
+            }
+        },
+        {
+            "Company_Name": "Azumo",
+            "Executives": {
+                "Name": "Juan Pablo Lorandi",
+                "Title": "CTO at Azumo and myNLU.com",
+                "Image URL": "https://media.licdn.com/dms/image/v2/C5603AQHxBcVA2cSAHg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1517655138210?e=2147483647&v=beta&t=TbWJFcNLSeaYPLVl6_raLGq-Tp9AivFM4bPVTPsbnNQ"
+            }
+        },
+        {
+            "Company_Name": "Azumo",
+            "Executives": {
+                "Name": "Leandro Hugo Vergara",
+                "Title": "Laravel Software Engineer",
+                "Image URL": "https://media.licdn.com/dms/image/v2/C4E03AQFwKrbqZYEGAg/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1555630572888?e=2147483647&v=beta&t=ZOg8lsNayJdBAsYSjAzIU1rBgoAFoeSjydaR5T6xj_Q"
+            }
+        },
+        {
+            "Company_Name": "Azumo",
+            "Executives": {
+                "Name": "Damián Nail",
+                "Title": "Senior Software Engineer at Azumo",
+                "Image URL": "https://media.licdn.com/dms/image/v2/C4D03AQGuDlRzJJUBPw/profile-displayphoto-shrink_100_100/profile-displayphoto-shrink_100_100/0/1516808674201?e=2147483647&v=beta&t=MLoV93J-kibcRK2MWqDr5bl3z4MKB_chneYAgg_b4iU"
+            }
+        },
+        {
+            "Company_Name": "Unity",
+            "Executives": {
+                "Name": "Max Levchin\nMax Levchin is an Influencer",
+                "Title": "Co-Founder & CEO at Affirm, Inc",
+                "Image URL": null
+            }
+        },
+        {
+            "Company_Name": "Unity",
+            "Executives": {
+                "Name": "Bart Manning",
+                "Title": "Head of Sales & Business Development, Strategic Verticals EMEA at Unity Technologies",
+                "Image URL": null
+            }
+        },
+        {
+            "Company_Name": "Unity",
+            "Executives": {
+                "Name": "Roelof Botha",
+                "Title": "Partner at Sequoia Capital",
+                "Image URL": null
+            }
+        },
+        {
+            "Company_Name": "Unity",
+            "Executives": {
+                "Name": "Eric Wersel",
+                "Title": "Senior Engineering Manager and Software Engineer",
+                "Image URL": null
+            }
+        }
+    ]
+    return (
+        <div className="flex flex-col items-center">
+            <div className="background">
+                <img src={image1.src} alt="" />
+            </div>
+            <div className="section1 flex flex-col items-center mt-10">
+                <h1 className={poppins.className + " heading"}>COMPANY AND EXECUTIVES SCRAPING</h1>
+                <input onChange={(e) => setLocation(e.target.value)} type="text" placeholder="Please enter the location here!" className="link mt-20" />
+                <button onClick={() => jobsScrap()} className={poppins_400.className + " submit mt-5"}>Scrape</button>
+                {
+                    data && (<div className=' overflow-scroll overflow-x-hidden p-10 w-full flex flex-col'>
+                        <span className='text-black mt-3'>Software Houses:</span> {data?.map((loc) => {
+                            return(<>
+                            <span className='text-black mt-3'>Company Name:</span> <p className='text-white'>{loc?.Company_Name}</p>
+                            <span className='text-black mt-3'>Name:</span> <p className='text-white'>{loc?.Executives?.Name}</p>
+                            <span className='text-black mt-3'>Title:</span> <p className='text-white'>{loc?.Executives?.Title}</p>
+                            <span className='text-black mt-3'>Profile Pic:</span> <p className='text-white'>{loc?.Executives?.['Image URL'] || "N/A"}</p>
+                            </>)
+                        })}
+                        
+                    </div>)
+                } 
+            </div>
+
+        </div>
+    )
+}
+
+
+jobs:
+const JobPage = () => {
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [locationKeyword, setLocationKeyword] = useState('')
+    const [data, setData] = useState(null)
+
+    function jobsScrap() {
+        fetch('http://127.0.0.1:8000/linkedin-jobs-scrap/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ searchKeyword: searchKeyword,
+                locationKeyword: locationKeyword
+             }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            console.log('response', response);  // Check if this line fails
+            return response.json();
+        })
+        .then(data => {
+            setData(data);
+            console.log(data);  // Check if this line fails
+        })
+        .catch(error => {
+            console.error(error);  // Use console.error to log errors
+        });
+    }
+    const dummydata = [
+        {
+            "job_data": {
+                "title": "Python Developer (Blockchain Protocol Engineer)",
+                "company": "TekScrum",
+                "location": "Karāchi, Sindh, Pakistan",
+                "application_status": "1 week ago",
+                "time_posted": ""
+            },
+            "description": "Job Title: Rust Developer for Solana Smart Contract Development (Project-Based) Company: Eon Weave Labs Location: Remote Job Type: Project-Based Contract"
+        },
+        {
+            "job_data": {
+                "title": "Asset Integrity Engineer",
+                "company": "Sui Southern Gas Company Limited",
+                "location": "Karachi Division, Sindh, Pakistan",
+                "application_status": "8 months ago",
+                "time_posted": ""
+            },
+            "description": "BS/BE in Metallurgy/ Electrical/ Chemical/Mechanical. Candidates shall have minimum 2 Years’ experience of supervision of Cathodic Protection systems, Coating inspections, asset integrity inspections (Candidates with previous experience of Oil & Gas Sector would be preferred) Implement corrective action through corrosion personnel"
+        },
+        {
+            "job_data": {
+                "title": "Asset Integrity Engineer",
+                "company": "Sui Southern Gas Company Limited",
+                "location": "Karachi Division, Sindh, Pakistan",
+                "application_status": "10 months ago",
+                "time_posted": ""
+            },
+            "description": "Bachelor’s degree in Engineering (Metallurgy/Materials/ Mechanical) with at least 5 years of experience in Cathodic Protection designing and supervision of cathodic protection, coating inspections, asset integrity inspections with certification of TWI/AMPP/API. Experience in Oil and Gas Sector shall be preferred. Implement corrective action through corrosion personnel."
+        },
+        {
+            "job_data": {
+                "title": "Lead Engineer",
+                "company": "Gaditek",
+                "location": "Karāchi, Sindh, Pakistan",
+                "application_status": "Be an early applicant",
+                "time_posted": "1 month ago"
+            },
+            "description": "Company Overview At Gaditek, our talent is not just exceptional - it's world-class! Our unstoppable team of 800+ employees is the best and the brightest, driving innovation across 7 Global SaaS Brands in 6 hottest industries, including Cyber Security, Digital Media, Managed Cloud, Affiliate Marketing, E-Commerce, Web.3.0, and Venture Building as a Service. Our team is made up of dreamers, doers, and all-around rockstars who are committed to making a difference. As a result, we’re among the best companies to work for, with a plethora of benefits and an amazing culture. We are seeking a middleware layer for an automotive software stack based on a microkernel architecture that involves several key competencies. Middleware acts as the bridge between the lower-level OS services (provided by the microkernel and user space) and the higher-level functional applications. It plays a crucial role in ensuring smooth communication, data management, and service orchestration across the system. Here are the essential competencies to look for in individuals for middleware development in this context. Operating System Fundamentals Middleware Development Programming Languages Data Management Familiar with Automotive Industry Standards"
+        },
+        {
+            "job_data": {
+                "title": "Blockchain TTO",
+                "company": "Ideofuzion",
+                "location": "Karāchi, Sindh, Pakistan",
+                "application_status": "Be an early applicant",
+                "time_posted": "2 weeks ago"
+            },
+            "description": "The Blockchain TTO role at Ideofuzion is entry-level, tailored for recent graduates skilled in Solidity or Rust. Responsibilities include developing, implementing, and maintaining blockchain applications and smart contracts, collaborating with teams, and staying updated on industry trends."
+        },
+        {
+            "job_data": {
+                "title": "Asset Integrity Senior Engineer",
+                "company": "Sui Southern Gas Company Limited",
+                "location": "Karachi Division, Sindh, Pakistan",
+                "application_status": "8 months ago",
+                "time_posted": ""
+            },
+            "description": "BS/BE in Metallurgy/ Electrical/ Chemical/Mechanical. Candidates shall have minimum 4 Years’ experience of cathodic protection designing, supervision of Cathodic Protection systems, Coating inspections, asset integrity inspections. Well-balanced interpersonal skills and strong verbal and written communications skills. (Candidates with certification of TWI/NACE(AMPP)/API would be preferred) Implement corrective action through corrosion personnel"
+        }
+    ]
+    return (
+        <div className="flex flex-col items-center">
+            <div className="background">
+                <img src={image1.src} alt="" />
+            </div>
+            <div className="section1 flex flex-col items-center mt-10">
+                <h1 className={poppins.className + " heading"}>JOBS SCRAPING</h1>
+                <input onChange={(e) => setSearchKeyword(e.target.value)} type="text" placeholder="Please enter the job type here!" className="link mt-20" />
+                <input onChange={(e) => setLocationKeyword(e.target.value)} type="text" placeholder="Please enter the location here!" className="link mt-20" />
+                <button onClick={() => jobsScrap()} className={poppins_400.className + " submit mt-5"}>Scrape</button>
+                {data &&
+                <div className=' overflow-scroll overflow-x-hidden'>
+                    {data.map((elem, index) => (
+                        <ul key={index} className=' p-10'>
+                            <li className='text-white'>title: {elem?.job_data?.title}</li>
+                            <li className='text-white'>company: {elem?.job_data?.company}</li>
+                            <li className='text-white'>location: {elem?.job_data?.location}</li>
+                            <li className='text-white'>application status: {elem?.job_data?.application_status}</li>
+                            <li className='text-white'>timeposted: {elem?.job_data?.time_posted}</li>
+                            <div>
+                                <h1 className='text-white'>Description: </h1>
+                                <li className='text-white'>{elem?.description}</li>
+                            </div>
+                        </ul>
+                    ))}
+                </div>
+            }
+            </div>
+            
+        </div>
+    )
+}
+
+
+profile:
+const ProfilePage = () => {
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [data, setData] = useState(null)
+
+    function jobsScrap() {
+        fetch('http://127.0.0.1:8000/scrape_profile/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ firstName: firstName, lastName: lastName }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                console.log('response', response);  // Check if this line fails
+                return response.json();
+            })
+            .then(data => {
+                setData(data);
+                console.log(data);  // Check if this line fails
+            })
+            .catch(error => {
+                console.error(error);  // Use console.error to log errors
+            });
+    }
+    const dummydata = {
+        "name": "CM Mubeen",
+        "headline": "Front-End Developer Seeking Exciting Opportunities | React.js | Javajavascript | CSS | HTML | Data Analytics",
+        "location": "Lahore, Punjab, Pakistan",
+        "followers": "Not available",
+        "about": "🌟 Welcome to my LinkedIn profile! 🌟\n\nAs a passionate Front End Developer, I specialize in creating dynamic and engaging web experiences using HTML, CSS, JavaScript, and React.js. With a solid foundation in these technologies, I've successfully crafted numerous mini projects that demonstrate my creativity, problem-solving skills, and attention to detail.\n\nMy journey in web development began with a fascination for design and a drive to bring ideas to life through code. Over the years, I've honed my skills in HTML and CSS to craft visually appealing and responsive layouts, while my proficiency in JavaScript enables me to add interactivity and functionality to web applications.\n\nOne of my key strengths lies in my ability to leverage React.js to build scalable and efficient user interfaces. Whether it's developing single-page applications or integrating complex features, I thrive on the challenge of pushing the boundaries of what's possible with React.js.\n\nIn addition to my technical skills, I'm deeply passionate about user experience (UI/UX) design and strive to create intuitive and seamless interfaces that delight users and drive engagement.\n\nI'm currently seeking new opportunities where I can contribute my expertise in front-end development to impactful projects and collaborate with like-minded professionals to create innovative solutions. If you're looking for a dedicated and versatile Front End Developer with a knack for turning ideas into reality, I'd love to connect!\n\nLet's explore how we can work together to bring your vision to life. Feel free to reach out and let's start a conversation! 🚀",
+        "education": [
+            "",
+            "",
+            ""
+        ],
+        "experience": [
+            "",
+            ""
+        ],
+        "certifications": "Not available",
+        "languages": "Not available"
+    }
+    return (
+        <div className="flex flex-col items-center">
+            <div className="background">
+                <img src={image1.src} alt="" />
+            </div>
+            <div className="section1 flex flex-col items-center mt-10">
+                <h1 className={poppins.className + " heading"}>PROFILE SCRAPING</h1>
+                <input onChange={(e) => setFirstName(e.target.value)} type="text" placeholder="Please enter the firstName here!" className="link mt-20" />
+                <input onChange={(e) => setLastName(e.target.value)} type="text" placeholder="Please enter the lastName here!" className="link mt-20" />
+                <button onClick={() => jobsScrap()} className={poppins_400.className + " submit mt-5"}>Scrape</button>
+                {
+    data && (
+        <div className='overflow-scroll overflow-x-hidden p-10'>
+            {data.map((user, index) => (
+                <div key={user._id} className='mb-10'>
+                    <p className='text-white'>name: {user.name}</p>
+                    <p className='text-white'>headline: {user.headline}</p>
+                    <p className='text-white'>location: {user.location}</p>
+                    <p className='text-white'>followers: {user.followers}</p>
+                    <p className='text-white'>about: {user.about}</p>
+                    <span className='text-white'>education:</span>
+                    {user.education && user.education.map((edu, eduIndex) => (
+                        <p key={`edu-${eduIndex}`} className='text-white'>{edu}</p>
+                    ))}
+                    <span className='text-white'>experience:</span>
+                    {user.experience && user.experience.map((exp, expIndex) => (
+                        <p key={`exp-${expIndex}`} className='text-white'>{exp}</p>
+                    ))}
+                    <p className='text-white'>certifications: {user.certifications}</p>
+                    <p className='text-white'>languages: {user.languages}</p>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+            </div>
+
+        </div>
+    )
+}

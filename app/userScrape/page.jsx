@@ -10,6 +10,25 @@ import { Typography } from "@material-tailwind/react";
 
 function userScrape (){
   const [isOpen, setIsOpen] = useState(false);
+  const dummydata = {
+    name: "CM Mubeen",
+    headline: "Front-End Developer Seeking Exciting Opportunities | React.js | Javajavascript | CSS | HTML | Data Analytics",
+    location: "Lahore, Punjab, Pakistan",
+    followers: "Not available",
+    about: "🌟 Welcome to my LinkedIn profile! 🌟\n\nAs a passionate Front End Developer, I specialize in creating dynamic and engaging web experiences using HTML, CSS, JavaScript, and React.js. With a solid foundation in these technologies, I've successfully crafted numerous mini projects that demonstrate my creativity, problem-solving skills, and attention to detail.\n\nMy journey in web development began with a fascination for design and a drive to bring ideas to life through code. Over the years, I've honed my skills in HTML and CSS to craft visually appealing and responsive layouts, while my proficiency in JavaScript enables me to add interactivity and functionality to web applications.\n\nOne of my key strengths lies in my ability to leverage React.js to build scalable and efficient user interfaces. Whether it's developing single-page applications or integrating complex features, I thrive on the challenge of pushing the boundaries of what's possible with React.js.\n\nIn addition to my technical skills, I'm deeply passionate about user experience (UI/UX) design and strive to create intuitive and seamless interfaces that delight users and drive engagement.\n\nI'm currently seeking new opportunities where I can contribute my expertise in front-end development to impactful projects and collaborate with like-minded professionals to create innovative solutions. If you're looking for a dedicated and versatile Front End Developer with a knack for turning ideas into reality, I'd love to connect!\n\nLet's explore how we can work together to bring your vision to life. Feel free to reach out and let's start a conversation! 🚀",
+    education: ["", "", ""],
+    experience: ["", ""],
+    certifications: "Not available",
+    languages: "Not available"
+  };
+  const [expandedRows, setExpandedRows] = useState({});
+
+  const toggleRowExpansion = (index) => {
+    setExpandedRows((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
+  };
 
   // Toggle the mobile menu
   const toggleMenu = () => {
@@ -33,7 +52,7 @@ function userScrape (){
       links: ["Templates", "UI Kits", "Icons", "Mockups"],
     },
   ];
-   
+
   const currentYear = new Date().getFullYear();
   
 
@@ -84,24 +103,81 @@ function userScrape (){
       </nav>
     </header>
     
-<h1 className="text-5xl text-white mt-20 text-center">Would you like to user scraping ?</h1>
+<h1 className="text-5xl text-white mt-20 text-center">Would you like to profile scraping ?</h1>
 <div className="mt-36 text-center text-base">
 <input
         type="text"
        className="px-32 outline-none rounded-md py-4"
         
         
-        placeholder="Enter URL"
+        placeholder="Enter First Name"
       />
+      <br />
+      <br />
+      <input
+        type="text"
+       className="px-32 outline-none rounded-md py-4"
+        
+        
+        placeholder="Enter Last Name"
+      />
+      <br />
+      <br />
       <button className="ml-6 py-4 px-16 bg-violet-500 transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" >Scrape</button>
       
 </div>
+<div className="p-10 ml-5">
+      <div className="overflow-x-auto p-4 mb-6">
+        <table className="w-full table-auto border-collapse border border-gray-700">
+          <thead className="bg-gray-300">
+            <tr>
+              <th className="text-gray-800 px-4 py-2 border border-gray-700">Field</th>
+              <th className="text-gray-800 px-4 py-2 border border-gray-700">Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="bg-gray-900">
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">Name</td>
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">{dummydata.name}</td>
+            </tr>
+            <tr className="bg-gray-900">
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">Headline</td>
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">{dummydata.headline}</td>
+            </tr>
+            <tr className="bg-gray-900">
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">Location</td>
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">{dummydata.location}</td>
+            </tr>
+            <tr className="bg-gray-900">
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">Followers</td>
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">{dummydata.followers}</td>
+            </tr>
+            <tr className="bg-gray-900">
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">About</td>
+              <td className="text-gray-200 px-4 py-2 border border-gray-700">
+                <div className="whitespace-nowrap overflow-hidden text-ellipsis">
+                  <div className={`overflow-x-auto ${expandedRows[0] ? '' : 'max-w-xs'}`}>
+                    {expandedRows[0] ? dummydata.about : dummydata.about.slice(0, 100) + '...'}
+                  </div>
+                  <button
+                    className="text-blue-400 hover:underline ml-2"
+                    onClick={() => toggleRowExpansion(0)}
+                  >
+                    {expandedRows[0] ? 'Show Less' : 'Read More'}
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
 
 
 <div className=" section-2  text-white text-center mt-36">
 <h2 className="text-5xl ">
-  hello, What's user scrape
+  hello, What's Profile scrape
 </h2>
 <p className="text-xl mt-3  text-center  leading-10 tracking-widest">
 Data scraping, or web scraping, is a process of importing data from websites into files or spreadsheets. It is used to extract data from the web, either for personal use by the scraping operator, or to reuse the data on other websites.</p>
