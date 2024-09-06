@@ -122,7 +122,7 @@ const dummydata = [
 
     return(
       <>
-        <div className="container mx-atuo flex flex-col content-center w-full">
+        <div className=" contain flex flex-col content-center w-full">
           <div className="section">
 
          
@@ -224,13 +224,13 @@ const dummydata = [
                         </table>
                     ))}
                 </div> */}
-                <div className='p-10 ml-10 2 rounded-md'>
+                <div className='p-10  '>
       {dummydata.map((elem, index) => {
         const isExpanded = expandedRows[index];
 
         return (
-          <div key={index} className='overflow-x-auto  p-4 mb-6 '>
-            <table className='w-full  table-auto border-collapse border  border-gray-700'>
+          <div key={index} className='overflow-x-auto table-style  p-4 mb-6 '>
+            <table className='w-full  table-auto border-collapse border   border-gray-700 rounded-md'>
               <thead className='bg-gray-300'>
                 <tr>
                   <th className='text-gray-900 px-4 py-2 border border-gray-700'>Title</th>

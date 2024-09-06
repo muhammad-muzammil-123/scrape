@@ -112,7 +112,7 @@ function companyScrape (){
 
   return (
     <>
-    <div className="container">
+    <div className="contain">
     <header className=" ">
       <div className="container mx-auto flex items-center justify-between max-w-7xl  px-2 sm:px-6 lg:px-8 p-4">
         <div className="flex items-center">

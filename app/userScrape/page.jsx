@@ -58,9 +58,9 @@ function userScrape (){
 
   return (
     <>
-    <div className="container">
+    <div className="contain mx-auto">
     <header className=" ">
-      <div className="container mx-auto flex items-center justify-between max-w-7xl  px-2 sm:px-6 lg:px-8 p-4">
+      <div className=" mx-auto flex items-center justify-between max-w-7xl  px-2 sm:px-6 lg:px-8 p-4">
         <div className="flex items-center">
         <img class="h-8 w-auto px-4" src="https://cdn.autoscrape.com/static/autoscrape/images/autoscrape-logo.653474f93379.svg" alt="Your Company"/>
 
@@ -126,7 +126,7 @@ function userScrape (){
       <button className="ml-6 py-4 px-16 bg-violet-500 transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" >Scrape</button>
       
 </div>
-<div className="p-10 ml-5">
+<div className="p-10">
       <div className="overflow-x-auto p-4 mb-6">
         <table className="w-full table-auto border-collapse border border-gray-700">
           <thead className="bg-gray-300">
@@ -179,8 +179,8 @@ function userScrape (){
 <h2 className="text-5xl ">
   hello, What's Profile scrape
 </h2>
-<p className="text-xl mt-3  text-center  leading-10 tracking-widest">
-Data scraping, or web scraping, is a process of importing data from websites into files or spreadsheets. It is used to extract data from the web, either for personal use by the scraping operator, or to reuse the data on other websites.</p>
+<h2 className="text-xl mt-3 leading-10 tracking-widest text-center">
+Data scraping, or web scraping, is a process of importing data from websites into files or spreadsheets. It is used to extract data from the web, either for personal use by the scraping operator, or to reuse the data on other websites.</h2>
 <button className="mt-5 mb-4 ml-6 py-4 px-5 bg-violet-500 transition-all text-white font-semibold rounded-md shadow-md hover:bg-purple-500">
   Let's go
 </button>

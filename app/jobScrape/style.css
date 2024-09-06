@@ -12,7 +12,7 @@ height: 100vh;
 
 
 }
-.container{
+.contain {
     background-image: url("https://cdn.autoscrape.com/static/autoscrape/images/stars-dark.8c0178c6869f.svg");
 
     z-index: -2;

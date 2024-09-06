@@ -104,7 +104,7 @@ function App() {
 
 
 <h1 className="md:text-5xl sm:text-3xl text-2xl text-white mt-20 text-center">Would you like to scraping today?</h1>
-<div className="md:mt-36 mt-20 text-center text-base">
+{/* <div className="md:mt-36 mt-20 text-center text-base">
 <input
         type="text"
        className="sm:px-32 md:px-20 px-14 outline-none rounded-md md:mb-0 mb-5  py-4"
@@ -115,7 +115,7 @@ function App() {
       <button className="ml-6 sm:py-4 py-3 sm:px-16 px-10 bg-violet-500  transition-all text-white font-semibold  rounded-md shadow-md hover:bg-purple-500" onClick={handleScrape}>Scrape</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {title && <h2>Title: {title}</h2>}
-</div>
+</div> */}
 
 
 
